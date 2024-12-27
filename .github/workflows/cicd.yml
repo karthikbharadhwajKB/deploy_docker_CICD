@@ -12,7 +12,23 @@ on:
 
 # jobs that will be executed in the workflow            
 jobs:
-    # job name
+    # job-1: Build 
+    build: 
+        # runs on ubuntu-latest
+        runs-on: ubuntu-latest
+
+        # steps that will be executed in
+        steps:
+        # step-1: Checkout code uses the action to checkout the code from the repository
+        - name: Checkout code 
+          uses: actions/checkout@v4
+
+        # step-2: Building a Docker image
+        - name: Build Docker Image 
+          run: docker build . --file DockerFile --tag workflow-test:$(date +%s)
+        
+
+    # job-2: Build and Test
     build-and-test: 
         # runs on ubuntu-latest
         runs-on: ubuntu-latest
@@ -21,7 +37,7 @@ jobs:
         steps: 
         # step-1: Checkout code uses the action to checkout the code from the repository
         - name: Checkout code 
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
 
         # step-2: Set up Python 3.9
         - name: Set up Python 3.9
